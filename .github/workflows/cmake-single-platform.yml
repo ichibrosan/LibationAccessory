@@ -21,27 +21,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Install Clang
-      # You may pin to the exact commit or the version.
-      # uses: egor-tensin/setup-clang@ef434b41eb33a70396fb336b1bae39c76d740c3d
-      uses: egor-tensin/setup-clang@v1
+
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v2
       with:
-        # Version to install
-        version: # optional, default is latest
+        version: "10.0"    
     
-        # Target platform
-        platform: # optional, default is x64
-    
-        # Install Cygwin packages
-        cygwin: # optional, default is 0
-    
-        # Set up cc/clang/c++/clang++ executables
-        cc: # optional, default is 1
-        # On Cygwin, replace executable symlinks with hardlinks
-        hardlinks: # optional, default is 0
-          
-    - name: Configure CMake
+     
+     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
